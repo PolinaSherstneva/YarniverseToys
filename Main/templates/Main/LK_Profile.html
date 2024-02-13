@@ -1,0 +1,26 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+{% block title %}
+Личный кабинет | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+{% block content %}
+<div class="profile_main">
+    <div class="profile_main_left">
+            {% include 'Main/LK.html' %}
+    </div>
+    <div class="profile_main_right">
+          <div class="profile_main_right_top">
+          <h2>Ваш профиль </h2>
+          </div>
+          <div class="profile_data_inf">
+          <ul>Имя: {{ user_profile.name }}</ul>
+          <ul>Фамилия: {{ user_profile.surname }}</ul>
+          <ul>Номер телефона: {% if user_profile.phone_number %}{{ user_profile.phone_number }} {% else %} не указан {% endif %}</ul>
+          <ul>Email: {{ user_profile.email }}</ul>
+          <ul>Псевдоним: {% if user_profile.nickname %}{{ user_profile.nickname }} {% else %} не указан {% endif %}</ul>
+          </div>
+          <a href="{% url 'changeinf' %}"><button class="profile_change_btn">Редактировать</button></a>
+    </div>
+</div>
+{% endblock %}

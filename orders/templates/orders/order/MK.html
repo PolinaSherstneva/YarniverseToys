@@ -1,0 +1,44 @@
+
+
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+{% block title %}
+Мастер-классы | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+{% block content %}
+<div class="profile_main">
+    <div class="profile_main_left">
+            {% include 'Main/LK.html' %}
+    </div>
+    <div class="profile_main_right">
+          <div class="profile_main_right_top">
+          <h2>Ваши мастер-классы</h2>
+          </div>
+          <div class="profile__data">
+
+              {% for el in tovars %}
+              {% if el.tovar.category_tovar.name_category == 'Мастер-класс' and el.order.status == 'Выполнен' %}
+              <article class="catalog__item">
+                  {{ el.tovar.name_tovar }}
+                 {% if el.tovar.img_tovar %}
+                 <a href="{% url 'orders:get_video_mk' el.tovar.id %}"><img class="item_img_in_order" src="{{ el.tovar.img_tovar.url }}"></a>
+                 {% endif %}
+                  <div class="catalog_item_main">
+
+                  </div>
+              </article>
+
+
+              {% endif %}
+              {% endfor %}
+
+          </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+
+

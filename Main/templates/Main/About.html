@@ -1,0 +1,51 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+{% block title %}
+Контакты | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+<main class="contacts">
+    <div class="contacts-top">
+           <h1>Обратная связь</h1>
+            <p>Свяжитесь с нами, чтобы задать свои вопросы о товарах или сотрудничестве.</p>
+    </div>
+   <div class="contacts_inner">
+      <div class="contacts_inner-left">
+         <div class="contacts_left">
+            <h4>Контактная форма</h4>
+             <form class="contacts_left" method="post">
+                {% csrf_token %}
+                {{ form.name }}<br>
+                {{ form.email }}<br>
+                {{ form.message }}<br>
+
+                <span>{{ error }}</span>
+                <button class="contacts_middle-btn" type="submit" style="
+    padding: 20px 0;">Отправить</button>
+             </form>
+        </div>
+      </div>
+      <div class="contacts_inner-right">
+          <div class="contacts_right-top">
+              <h4> <i class="bi bi-building" style="padding-right:10px;"></i>Офис</h4>
+            <p>г. Казань, Советский район, ул. Игелекле, 35</p>
+            <h4><i class="bi bi-envelope" style="padding-right:10px;"></i>Почта</h4>
+            <p>yarniverse_toys@mail.ru</p>
+              <h4><i class="bi bi-phone" style="padding-right:10px;"></i>Телефон</h4>
+            <p>+7 (939)3355350</p>
+        </div>
+          <div class="contacts_right-bottom">
+              <div class="geolocation_container">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.150642464762!2d49.217771176008775!3d55.8079850877404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415eb25e2de6b801%3A0xf766e9db2c2dfe20!2z0YPQuy4g0JjQs9C10LvQtdC60LvQtSwgMzUsINCa0LDQt9Cw0L3RjCwg0KDQtdGB0L8uINCi0LDRgtCw0YDRgdGC0LDQvSwgNDIwMDg4!5e0!3m2!1sru!2sru!4v1699981325642!5m2!1sru!2sru" width="450" height="300" style="border:0;border-radius:10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+          </div>
+      </div>
+
+   </div>
+</main>
+{% endblock %}
+
+
+

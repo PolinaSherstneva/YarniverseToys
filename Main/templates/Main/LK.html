@@ -1,0 +1,33 @@
+
+{% load static %}
+          <div class="profile_main_left-avatar">
+              {% if user_profile.avatar %}<img style="width: 100px;" src="{{ user_profile.avatar.url }}" alt="">
+              {% else %}
+              <img style="width: 100px;" src="{% static 'Main/img/profile.png' %}" alt="">
+              {% endif %}
+              <h1>{{ user_profile.name }} {{ user_profile.surname }}</h1>
+          </div>
+          <ul class="profile_main_menu">
+              <li><a href="{% url 'lk' %}"><p class="profile_main_menu_main_">Профиль</p></a></li>
+
+              {% if user.is_superuser %}
+              <li><a href="{% url 'orders:get_admin_orders' %}"><p class="profile_main_menu_main_">Работа с заказами</p></a></li>
+                {% else %}
+              <li><a href="{% url 'orders:get_orders' %}"><p class="profile_main_menu_main_">Заказы</p></a></li>
+              {% endif %}
+              {% if user.is_superuser %}
+              <li><a href="{% url 'get_admin_feedback' %}"><p class="profile_main_menu_main_">Обратная связь</p></a></li>
+              {% else %}
+              <li><a href="{% url 'orders:get_mks' %}"><p class="profile_main_menu_main_">Мастер-классы и схемы</p></a></li>
+              {% endif %}
+
+
+              <li><a href="{% url 'sub' %}"><p class="profile_main_menu_main_">Подписки</p></a></li>
+
+              <li><a href="{% url 'logout' %}"><p class="profile_main_menu_main_">Выйти</p></a></li>
+          </ul>
+
+
+
+
+

@@ -1,0 +1,120 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+  Корзина покупок
+{% endblock %}
+
+{% block content %}
+
+{% if cart %}
+<main class="cart_details">
+    <div class="cart_inner">
+        <div class="cart_left-top-title">
+            <h1>Корзина покупок</h1>
+            <div class="cart_left-top-btns">
+            <a href="{% url 'cart:cart_clear' %}" class="button light"><p class="cart_back_to">Очистить корзину</p></a>
+            <a href="{% url 'catalog' %}" class="button light"><p class="cart_back_to">В каталог</p></a>
+            </div>
+        </div>
+
+        <div class="cart_inner-main">
+            <div class="cart_table">
+              <table class="cart_">
+            <thead class="cart_list">
+            <tr class="cart_list-tr">
+                <th ></th>
+                <th><!--Название товара--></th>
+                <th><p>Количество</p></th>
+                <th style="width:100px;"><p>Цена</p></th>
+                <th style="width:100px;"><p>Сумма</p></th>
+                <th>  <p>Удалить</p></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for item in cart %}
+            {% with tovar=item.tovar %}
+
+                <tr class="card_item_inner">
+                    <td style="
+    width: 330px;
+">
+                        <a href="{% url 'tovar-detail' tovar.id %}">
+                            <img style="height:318px;" src="{% if tovar.img_tovar %}{{ tovar.img_tovar.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+                        </a>
+                    </td>
+                    <td style="width: 250px;"><p>{{ tovar.name_tovar }}</p></td>
+
+                    <td style="position:absolute; margin:0 10px 0 20px;top: 45%;left: 63%;display: flex; align-items: center;font-size:20px;" >
+                        {% if tovar.category_tovar.name_category != 'Мастер-класс' %}
+                        {% if item.quantity != 1 %}
+                        <form action="{% url 'cart:cart_minus' tovar.id %}" method="post">
+                            {{ item.update_quantity_form.quantity }}
+                            {{ item.update_quantity_form.update }}
+                            <input type="submit" value="-" style=" border: none; background: none;">
+                            {% csrf_token %}
+                        </form>
+                        {% endif %}
+                        {{ item.quantity }}
+                        {% if item.quantity < tovar.stock %}
+                        <form action="{% url 'cart:cart_plus' tovar.id %}" method="post">
+                            {{ item.update_quantity_form.quantity }}
+                            {{ item.update_quantity_form.update }}
+                            <input type="submit" value="+" style="    border: none;    background: none;">
+                            {% csrf_token %}
+                        </form>
+                        {% endif %}
+                        {% else %}
+                          1
+                        {% endif %}
+                    </td>
+                    <td class="num"><p>{{ tovar.price_tovar|intcomma }} ₽</p></td>
+                    <td class="num"><p>{{ item.total_price|intcomma }} ₽</p></td>
+                    <td><a style="color: black;" href="{% url 'cart:cart_remove' tovar.id %}">X</a></td>
+                </tr>
+
+            {% endwith %}
+            {% endfor %}
+
+            </tbody>
+        </table>
+            </div>
+            <div class="cart_inner_right">
+               <div class="cart_right_inner">
+                <div class="cart_right_inner-title">
+                    <h3>Всего</h3>
+                </div>
+                <div class="cart_right_inner-price">
+                    <p>Конечная стоимость:</p>
+                    <h4>{{ cart.get_total_price|intcomma }} ₽</h4>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="cart_inner_buy-btn">
+                    <a href="{% url 'orders:order_create' %}"><p>Оформить заказ</p></a>
+                </div>
+                {% else %}
+                <p>Для оформления заказа вам необходимо авторизоваться</p>
+                <div class="cart_inner_buy-btn">
+
+                    <a href="{% url 'login' %}"><p>Авторизоваться</p></a>
+                </div>
+                {% endif %}
+
+               </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% else %}
+
+            <div class="cart_left-top-title">
+                <h1 style="padding: 20px 0 0 px 0;">Корзина покупок пустая...</h1>
+                  <a href="{% url 'catalog' %}" class="button light"><p class="cart_back_to">В каталог</p></a>
+            </div>
+            <div class="cat">  <img height="650" style="text-align:center;" src="{% static 'Main/img/Lama_sad.png' %}"></div>
+
+{% endif %}
+
+{% endblock %}

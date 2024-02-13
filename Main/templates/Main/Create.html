@@ -1,0 +1,29 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+
+{% block title %}
+Форма для добавления и редактирования товара | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+
+<h3 class="textp">Форма для добавления и редактирования товара</h3>
+
+<form class="form_add" method="post">
+    {% csrf_token %}
+    {{ form.name_tovar }}<br>
+    {{ form.category_tovar }}<br>
+    {{ form.price_tovar }}<br>
+    {{ form.slug }}<br>
+    {{ form.url_tovar }}<br>
+    {{ form.description }}<br>
+    {{ form.img_tovar }}<br>
+    {{ form.stock }}<br>
+
+    <span>{{ error }}</span>
+    <button class="btn btn-success" style="padding-top:10px" type="submit">Добавить товар</button>
+
+</form>
+
+{% endblock %}

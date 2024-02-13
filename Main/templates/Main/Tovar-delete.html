@@ -1,0 +1,20 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+
+{% block title %}
+Удаление товара | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+
+<h1 class="textp">Форма по удалению товара</h1>
+<aside class="zone_form_add">
+<form class="form_add" method="post">
+    {% csrf_token %}
+
+    <button class="btn btn-success" type="submit">Удалить товар</button>
+
+</form>
+</aside>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Оплата | Yarniverse Toys - онлайн-магазин материалов для вязания{% endblock %}
+
+{% block content %}
+<main class="payment">
+    <div class="payment_top">
+        <h1>Введите данные:</h1>
+    </div>
+    <div class="payment_center">
+        <h3></h3>
+        <div class="payment_center_list">
+            <p style="
+    margin-bottom: 0;">Номер карты</p>
+            <input style="width: 500px" type="text">
+            <p style="    margin-top: 18px;
+    margin-bottom: 0;">Действует до</p>
+            <div class="payment_numbers" style="display: flex;
+    justify-content: flex-start;">
+                <input style="width:74px" type="text" placeholder="MM" >
+                <h1 style="margin:0 6px;">/</h1>
+                <input style="width:74px" type="text" placeholder="ГГ" >
+
+
+            </div>
+            <p style="    margin-top: 18px;
+    margin-bottom: 0;">CCV</p>
+            <input style="  width:74px;  margin-top: 18px;
+    margin-bottom: 0;" type="text" placeholder="000">
+        </div>
+    </div>
+    <div class="payment_center_btn">
+            <a href="{% url 'orders:order_created' %}"><button class="payment_center_button">Оплатить</button></a>
+    </div>
+</main>
+
+{% endblock %}

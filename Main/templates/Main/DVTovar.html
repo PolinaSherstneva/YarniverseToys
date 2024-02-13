@@ -1,0 +1,192 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+{{ tovar.name_tovar }} | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+{% if tovar.category_tovar.name_category == "Мастер-класс" %}
+<!--МК-->
+<main class="catalog_main">
+    <div class="">
+     <a href="javascript:history.go(-1)" class="btn btn-default"><i class="bi bi-arrow-left-short"></i><p></p></a>
+    </div>
+    <div class="catalog_inner">
+        <div class="left_column">
+            {% if tovar.img_tovar %}
+            <img src="{{ tovar.img_tovar.url }}">
+            {% endif %}
+        </div>
+            <div class="right-column">
+               <div class="product-title">
+                 <h3 style="font-size:40px;">{{ tovar.name_tovar }}</h3>
+               </div>
+                <div class="product-description">
+                 <h3 style="font-size:30px;" class="product-price">{{ tovar.price_tovar|intcomma }} ₽</h3>
+                 <p>{{ tovar.description }}</p>
+                </div>
+                <div class="right-column-btn">
+
+            <form action="{% url 'cart:cart_add' tovar.id %}" method="post">
+                {{ cart_tovar_form }}
+                {% csrf_token %}
+                <input class="btn_in_cardtovar" style="padding:15px;" type="submit" value="Добавить мастер-класс в корзину">
+
+            </form>
+            <form action="{% url 'cart:card_add_all' tovar.id %}" method="post">
+                {{ cart_tovar_form }}
+                {% csrf_token %}
+                <input class="btn_in_cardtovar" style="padding:15px;" type="submit" value="Добавить мастер-класс и материалы в корзину">
+            </form>
+        <!--</div>
+            {% if user.is_superuser %}
+            <a href="{% url 'tovar-update' tovar.id %}" class="button_in_cardtovar">Изменить товар</a>
+            <a href="{% url 'tovar-delete' tovar.id %}" class="button_in_cardtovar">Удалить товар</a>
+             {% endif %}
+        <div> -->
+        </div>
+    </div>
+        {% if tovar %}
+       {% endif %}
+   </div>
+
+    <div class="catalog_main_title">
+        <h1>Материалы для {{ tovar.name_tovar }}</h1>
+      </div>
+    {% if tovar %}
+        <div class="catalog_main_middle">
+           <div class="catalog_main_middle-items">
+             {% for el in setmkmat %}
+             <div class="catalog_main_middle-item">
+                 <article class="catalog__item">
+                    <div class="catalog_item_image">
+                 {% if el.Tovar.img_tovar %}
+                        <a href="{% url 'tovar-detail' el.Tovar.id %}"><img class="item_img" src="{{ el.Tovar.img_tovar.url }}"></a>
+                 {% endif %}
+               </div>
+                    <div class="catalog_item_main">
+                   <div class="catalog_item_main-name">
+                       <h4>{{ el.Tovar.slug }}</h4>
+                   </div>
+                   <div class="catalog_item_main-description">
+                       <p>{{ el.Tovar.description }}</p>
+                   </div>
+                   <div class="catalog_item_main-price">
+                     <p>{{ el.Tovar.price_tovar|intcomma }} ₽</p>
+                   </div>
+                 <div class="catalog_item_bottom">
+
+                   <form id="In_cart" action="{% url 'cart:cart_add' el.Tovar.id %}" method="post">
+                    {{ cart_tovar_form }}
+                    {% csrf_token %}
+                      <input class="button_in_cardtovar" style="padding:15px 20px;" type="submit" value="В корзину">
+                   </form>
+
+                 </div>
+               </div>
+                </article>
+             </div>
+             {% endfor %}
+               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                    $('#In_cart').each(function() {
+                    $(this).on('submit',function(e)
+                    {
+
+                      e.preventDefault(); // Предотвращаем отправку формы
+                      var form = $(this);
+                      var url = form.attr('action');
+                      var data = form.serialize();
+                      $.ajax
+                      ({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                        success: function(response)
+                        {
+                          alert("Товар добавлен в корзину");
+                        },
+                        error: function(response)
+                        {
+                          $('#response-message').html(response.responseJSON.error);
+                        }
+                      });
+
+                    });
+                    });
+                    </script>
+
+           </div>
+        </div>
+    {% else %}
+       <p class="textp">Товара нет!</p>
+    {% endif %}
+</main>
+{% else %}
+
+    <div class="">
+     <a href="javascript:history.go(-1)" class="btn btn-default"><i class="bi bi-arrow-left-short"></i><p></p></a>
+    </div>
+
+<!--Товар-->
+<main class="catalog_main">
+    <div class="catalog_inner">
+        <div class="left_column">
+            {% if tovar.img_tovar %}
+            <img src="{{ tovar.img_tovar.url }}">
+            {% endif %}
+        </div>
+            <div class="right-column">
+        <div class="product-title">
+            <h3>{{ tovar.slug }}</h3>
+        </div>
+        <div class="product-description">
+            <h3 class="product-price">{{ tovar.price_tovar|intcomma }} ₽</h3>
+            {% if tovars %}
+
+            <div class="product-colors">
+                {% for el in tovars %}
+            {% if el.category_tovar.name_category == tovar.category_tovar.name_category %}
+                {% if el.color %}
+                <div class="product-color">
+                  <a href="{% url 'tovar-detail' el.id %}"><img src="{{ el.color.img_color.url }}"></a>
+                </div>
+                {% endif %}
+                {% endif %}
+
+            {% endfor %}
+            </div>
+
+
+            {% endif %}
+            <p>{{ tovar.description }}</p>
+            <p>В наличии: {{ tovar.stock }} шт.</p>
+        </div>
+        <div class="right-column-btn">
+            {% if tovar.stock >= 1 %}
+            <form action="{% url 'cart:cart_add' tovar.id %}" method="post">
+                {{ cart_tovar_form }}
+                {% csrf_token %}
+                <input class="btn_in_cardtovar" style="padding:15px 60px;" type="submit" value="В корзину">
+            </form>
+            {% else %}
+            <input class="btn_in_cardtovar" style="padding:15px 60px;" type="submit" value="Нет в наличии">
+            {% endif %}
+        </div>
+            {% if user.is_superuser %}
+            <a href="{% url 'tovar-update' tovar.id %}" class="button_in_cardtovar">Изменить товар</a>
+            <a href="{% url 'tovar-delete' tovar.id %}" class="button_in_cardtovar">Удалить товар</a>
+             {% endif %}
+
+        </div>
+        {% if tovar %}
+
+       {% endif %}
+   </div>
+</main>
+{% endif %}
+
+{% endblock %}
+

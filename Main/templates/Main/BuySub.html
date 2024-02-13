@@ -1,0 +1,34 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+{% block title %}
+Подписки | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+{% block content %}
+<div class="profile_main">
+    <div class="profile_main_left">
+            {% include 'Main/LK.html' %}
+    </div>
+    <div class="profile_main_right">
+          <div class="profile_main_right_top">
+          <h2>Ваши подписки</h2>
+          </div>
+          <div class="profile_podpicki">
+
+            {% for el in subt %}
+              <div class="LKPodpicki">
+            <p>Тип подписки: {{ el.name }}</p>
+            <p>Стоимость: {{ el.cost }}</p>
+            <p>Срок действия: {{ el.period }}</p>
+                  <a href="{% url 'buy_sub' el.id %}"><button>Оформить подписку</button></a>
+             <form class="" action="{% url 'buy_sub' el.id %}" method="post">
+                {{ form.name }}
+                {% csrf_token %}
+            <button class="btn btn-success" style="margin-bottom: 18px; width: 100%;padding: 15px 0;border-radius: 15px;background: #541e38;border:none;" type="submit">Оформить</button>
+            </form>
+                  </div>
+            {% endfor %}
+          </div>
+    </div>
+</div>
+{% endblock %}

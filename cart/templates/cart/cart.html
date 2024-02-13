@@ -1,0 +1,24 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+{% block title %}
+Корзина | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+    <h1>Корзина</h1>
+     
+    {% if item %}
+        <ul>
+        {% for item in cart_items %}
+            <li>
+                {{ item.tovar_id }} x {{ item.quantity }}
+                <a href="{% url 'remove_from_cart' item.id %}">x</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Ваша корзина пуста</p>
+    {% endif %}
+
+{% endblock %}

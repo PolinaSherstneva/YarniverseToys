@@ -1,0 +1,203 @@
+.profile_main{
+ height:fit-content;
+ margin-bottom:50px;
+ margin-top:30px;
+ display:flex;
+ justify-content:space-between;
+
+}
+.profile_main_inner{
+display:flex;
+
+}
+.profile_main_left{
+
+ border-right:1px solid black;
+}
+.HeadLK{
+  padding:0 0 15px 0;
+  width: max-content;
+  font-family: 'Candara', sans-serif;
+}
+.profile_main_left_inner{
+  padding:30px 70px 30px 30px;
+  border-right:1px solid black;
+
+}
+.profile_main_menu a{
+padding:10px 0;
+}
+.profile_main_menu a{
+color:black;
+font-size:20px;
+
+
+}
+
+.profile_main_right{
+font-size: 24px;
+font-family: 'Candara', sans-serif;
+border-radius:30px;
+background-color: #d7b5bb;
+padding:40px 40px 0 40px;
+width: 950px;
+    min-height: 580px;
+
+}
+.profile_main_right_top{
+display:flex;
+justify-content:space-between;
+border-bottom: 1px solid black;
+}
+.profile_change_btn {
+margin: 10px 0 0 0;
+border:1px solid black;
+
+}
+.profile_data_inf ul{
+padding:10px;
+}
+.profile_data ul{
+    background-color: white;
+    margin-top: 23px;
+    width: fit-content;
+    border: 1px solid black;
+    border-radius: 30px;
+    padding: 32px 32px;
+}
+
+.profile__data{
+padding-top: 30px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.profile_podpicki{
+padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.LKPodpicki{
+background-color: ghostwhite;
+    width: 277px;
+    border: 1px solid black;
+    padding: 20px 18px;
+    border-radius: 30px;
+    text-align: left;
+}
+
+.profile_main_right_top img{
+width:105px;
+}
+.card{
+margin:0 5px;
+    width: 205px;
+    height: 200px;
+    border-radius:30px;
+stroke-width: 1px;
+stroke: #000;
+filter: drop-shadow(10px 10px 24px rgba(0, 0, 0, 0.24));
+
+}
+.profile_main_right_top_inf{
+padding-left:10px;
+}
+.profile_main_right_top_inf input{
+    margin: 10px 0 15px 0;
+}
+.profile_main_right_bottom_items{
+display:flex;
+justify-content:space-between;
+padding-top:20px;
+}
+.profile_main_right_bottom_item p{
+padding:20px 0 0 16px;
+}
+.profile_main_right_bottom h3{
+font-family: 'Candara', sans-serif;
+}
+
+.profile_main_menu_main_:hover{
+ width:100%;
+  border-radius:15px;
+  background: #541e38;
+  color:white;
+
+}
+.profile_main_menu_main-orders{
+
+}
+.profile_main_menu li{
+  width:100%;
+  border-radius:15px;
+}
+.profile_main_menu li p{
+padding:15px 20px;
+}
+
+.profile_main_menu {
+margin-top:25px;
+text-align:start;
+padding-left:0;
+}
+.profile_change_btn{
+margin-top:20px;
+padding:15px 20px;
+border:none;
+width:fit-content;
+  border-radius:15px;
+  background: #541e38;
+  color:white;
+
+}
+.profile_main_left-avatar{
+text-align:center;
+}
+/*страницы оплаты*/
+.payment{
+    height: fit-content;
+    padding-bottom: 50px;
+display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.payment_center_button{
+margin-top: 20px;
+    padding: 20px 20px;
+    border: none;
+    width: 626px;
+    border-radius: 15px;
+    background: #541e38;
+    color: white;
+}
+.payment_center{
+height:fit-content;
+background-color: #d7b5bb;
+padding: 40px 70px 40px 70px;
+font-family: 'Candara', sans-serif;
+    border-radius: 30px;
+}
+.payment_top h1{
+font-family: 'Candara', sans-serif;
+margin-bottom: 30px;
+}
+.payment_center_list input{
+margin-top: 10px;
+
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+.payment_center_list p{
+font-size:20px;
+}
+.payment_center_list{
+
+ }
+.profile_data a{
+    color: black;}
+
+

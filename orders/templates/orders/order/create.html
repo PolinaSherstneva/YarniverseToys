@@ -1,0 +1,45 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Оформление заказа | Yarniverse Toys - онлайн-магазин материалов для вязания{% endblock %}
+
+{% block content %}
+
+<main class="order_main">
+    <div class="cart_left-top-title">
+            <h1>Оформление заказа</h1>
+            <a href="{% url 'cart:cart_detail' %}" class="button light"><p class="cart_back_to">Назад в корзину</p></a>
+        </div>
+    <div class="order_">
+        <div class="order-left">
+          <form action="." method="post" class="order-form">
+          {{ form.as_p }}
+           <p><input type="submit" value="Оформить"></p>
+          {% csrf_token %}
+        </form>
+        </div>
+        <div class="order-info">
+           <h3>Ваша корзина</h3>
+            <div class="order_info_price">
+                <p>Итоговая стоимость: </p>
+               <h2>{{ cart.get_total_price|intcomma }} ₽</h2>
+            </div>
+
+           <ul>
+            {% for item in cart %}
+            {% with tovar=item.tovar %}
+                <li>
+                    {{ item.quantity }} x {{ tovar.name_tovar }}
+                    <span>{{ item.total_price|intcomma }} ₽</span>
+                </li>
+            {% endwith %}
+            {% endfor %}
+        </ul>
+          </div>
+    </div>
+
+
+</main>
+
+{% endblock %}

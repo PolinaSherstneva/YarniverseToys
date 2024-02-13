@@ -1,0 +1,49 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Информация о заказе | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+{% block content %}
+<div class="profile_main">
+    <div class="profile_main_left">
+            {% include 'Main/LK.html' %}
+    </div>
+    <div class="profile_main_right">
+          <div class="profile_main_right_top">
+          <h2>Заказ №{{ order.id }} от {{ order.created }} статус: {{ order.status }}</h2>
+              {% if user.is_superuser %}
+              <form method="post">
+                    {% csrf_token %}
+                    {{ form.status }}
+
+                      <input class="" style="" type="submit" value="Обработать">
+
+                   </form>
+              {% endif %}
+          </div>
+          <div class="profile__data">
+            {% for el in tovar %}
+
+            <article class="catalog__item">
+
+                 {% if el.tovar.img_tovar %}
+                 <a href="{% url 'tovar-detail' el.tovar.id %}"><img class="item_img_in_order" src="{{ el.tovar.img_tovar.url }}"></a>
+                 {% endif %}
+
+                     <div class="catalog_item_main">
+                   <div class="catalog_item_main-name">
+                       <h4>{{ el.tovar.slug }}</h4>
+                   </div>
+                   <div class="catalog_item_main-price">
+                     <p>{{ el.tovar.price_tovar|intcomma }} ₽</p>
+                   </div>
+               </div>
+                 </article>
+            {% endfor %}
+          </div>
+
+</div>
+</div>
+{% endblock %}

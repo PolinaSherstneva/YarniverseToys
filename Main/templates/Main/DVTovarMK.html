@@ -1,0 +1,104 @@
+{% extends 'Main/layout.html' %}
+
+{% load humanize %}
+
+{% block title %}
+Материалы | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+<a href="javascript:history.go(-1)" class="btn btn-default"><i class="bi bi-arrow-left-short"></i> Вернуться к мастер-классу</a>
+
+
+
+{% for el in setmkmat %}
+
+
+
+
+
+
+{% endfor %}
+<main class="catalog_main">
+  <div class="catalog_main_inner">
+      <div class="catalog_main_title">
+        <h1>Материалы для {{ tovar.name_tovar }}</h1>
+      </div>
+    {% if tovar %}
+        <div class="catalog_main_middle">
+           <div class="catalog_main_middle-items">
+             {% for el in setmkmat %}
+             <div class="catalog_main_middle-item">
+               <div class="catalog_item_image">
+                 {% if el.Tovar.img_tovar %}
+                 <img class="item_img" src="{{ el.Tovar.img_tovar.url }}">
+                 {% endif %}
+               </div>
+               <div class="catalog_item_main">
+                   <div class="catalog_item_main-name">
+                       <h4>{{ el.Tovar.slug }}</h4>
+                   </div>
+                   <div class="catalog_item_main-description">
+                       <p>{{ el.Tovar.description }}</p>
+                   </div>
+                   <div class="catalog_item_main-price">
+                     <p>{{ el.Tovar.price_tovar|intcomma }} ₽</p>
+                   </div>
+                 <div class="catalog_item_bottom">
+
+                   <form id="In_cart" action="{% url 'cart:cart_add' el.Tovar.id %}" method="post">
+                    {{ cart_tovar_form }}
+                    {% csrf_token %}
+                      <input class="button_in_cardtovar" style="padding:15px 20px;" type="submit" value="В корзину">
+                   </form>
+
+                 </div>
+               </div>
+             </div>
+             {% endfor %}
+               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+
+                    $('#In_cart').each(function() {
+                    $(this).on('submit',function(e)
+                    {
+
+                      e.preventDefault(); // Предотвращаем отправку формы
+                      var form = $(this);
+                      var url = form.attr('action');
+                      var data = form.serialize();
+                      $.ajax
+                      ({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                        success: function(response)
+                        {
+                          alert("Товар добавлен в корзину");
+                        },
+                        error: function(response)
+                        {
+                          $('#response-message').html(response.responseJSON.error);
+                        }
+                      });
+
+                    });
+                    });
+                    </script>
+
+           </div>
+        </div>
+
+
+
+    {% else %}
+       <p class="textp">Товара нет!</p>
+    {% endif %}
+  </div>
+</main>
+
+
+
+
+
+{% endblock %}

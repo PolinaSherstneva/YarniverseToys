@@ -1,0 +1,28 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+{% block title %}
+Администрирование: обратная связь | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+<div class="profile_main">
+    <div class="profile_main_left">
+            {% include 'Main/LK.html' %}
+    </div>
+<div class="profile_main_right">
+          <div class="profile_main_right_top">
+          <h2>Обратная связь</h2>
+         </div>
+            <div class="profile_data">
+                {% if feedback %}
+                    {% for el in feedback %}
+                        <ul>Комментарий №{{ el.id }} от {{ el.name }}: {{ el.message }}</ul>
+
+                    {% endfor %}
+                  {% endif %}
+            </div>
+
+</div>
+</div>
+{% endblock %}

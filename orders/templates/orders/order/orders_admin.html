@@ -1,0 +1,64 @@
+{% extends 'Main/layout.html' %}
+{% load static %}
+
+{% block title %}
+Администрирование: заказы | Yarniverse Toys - онлайн-магазин материалов для вязания
+{% endblock %}
+
+{% block content %}
+
+<div class="profile_main">
+      <div class="profile_main_left">
+            {% include 'Main/LK.html' %}
+    </div>
+      <div class="profile_main_right">
+          <div class="profile_main_right_top">
+          <h2>Заказы</h2>
+          </div>
+          <div class="profile_data">
+              {% if orders %}
+              <h2>Новые заказы</h2>
+              {% for el in orders %}
+              {% if el.status == 'Принят в работу' %}
+
+              <ul><a href="{% url 'orders:get_tovar_in_orders' el.id %}">Заказ №{{ el.id }} от {{ el.created }}</a>
+
+
+              </ul>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              {% if orders %}
+              <h2>На сборке</h2>
+              {% for el in orders %}
+              {% if el.status == 'В сборке' %}
+              <ul><a href="{% url 'orders:get_tovar_in_orders' el.id %}">Заказ №{{ el.id }} от {{ el.created }}</a></ul>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              {% if orders %}
+              <h2>Доставляются</h2>
+              {% for el in orders %}
+              {% if el.status == 'В доставке' %}
+              <ul><a href="{% url 'orders:get_tovar_in_orders' el.id %}">Заказ №{{ el.id }} от {{ el.created }}</a></ul>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              {% if orders %}
+              <h2>Выполнены</h2>
+              {% for el in orders %}
+              {% if el.status == 'Выполнен' %}
+              <ul><a href="{% url 'orders:get_tovar_in_orders' el.id %}">Заказ №{{ el.id }} от {{ el.created }}</a></ul>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+          </div>
+
+      </div>
+</div>
+{% endblock %}
+
